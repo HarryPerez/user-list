@@ -1,8 +1,8 @@
-import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import UserInfo from './screens/UserInfo';
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import UserInfo from "./screens/UserInfo";
 
-import './app.scss';
+import "./app.css";
 
 const queryClient = new QueryClient();
 

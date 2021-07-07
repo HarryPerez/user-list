@@ -5,15 +5,12 @@
   "dependencies": {
     "axios": "^0.21.1",
     "minimist": "^1.2.5",
-    "node-sass": "^6.0.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-query": "^3.18.1",
-    "rescript": "^9.1.4",
-    "rescripts": "^0.0.1-security"
+    "react-query": "^3.18.1"
   },
   "scripts": {
-    "start": "node ./scripts/start.js development",
+    "start": "rescripts start",
     "build": "rescripts build",
     "test": "rescripts test"
   },

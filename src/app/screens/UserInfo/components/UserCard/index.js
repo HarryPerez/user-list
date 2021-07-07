@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import styles from './styles.module.scss';
+import "./styles.css";
 
 function UserCard({ user }) {
-  console.log(styles);
   const userName = `${user.name.title} ${user.name.first} ${user.name.last}`;
   return (
-    <div className={styles.userCardContainer}>
+    <div className="user-card-container">
       <div>{userName}</div>
     </div>
   );
