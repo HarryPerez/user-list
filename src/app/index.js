@@ -2,7 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import UserInfo from './screens/UserInfo';
 
-import './style.css';
+import './app.scss';
 
 const queryClient = new QueryClient();
 
