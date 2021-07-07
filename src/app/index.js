@@ -1,6 +1,5 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import UserInfo from './screens/UserInfo';
 
 import './style.css';
