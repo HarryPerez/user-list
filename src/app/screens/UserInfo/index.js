@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-
-import { getUsers } from "../../../services/UserService";
+import React, { useState, useContext } from "react";
 
 import SearchBar from "./components/SearchBar";
 import SortBar from "./components/SortBar";
 import UserCard from "./components/UserCard";
+import UserModal from "./components/UserModal";
+
+import { UserContext } from "../../context";
 
 import { getUserInfo } from "./utils";
 
@@ -13,12 +13,26 @@ import "./styles.css";
 
 function UserInfo() {
   const [filter, setFilter] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [sort, setSort] = useState("userName");
-  const { data } = useQuery("users", getUsers);
-  const users = data?.data.results || [];
+  const [editUser, setEditUser] = useState();
+  const users = useContext(UserContext) || [];
 
   const handleSetFilter = (value) => setFilter(value);
   const handleSetSort = (value) => setSort(value);
+
+  const onHandleSave = (updateUser) => {
+    users[editUser.index] = updateUser;
+    setIsOpen(false);
+  };
+
+  const setModalIsOpen = (user, index) => {
+    setIsOpen(true);
+    setEditUser({
+      user: user,
+      index: index
+    });
+  };
 
   const filterUserByAll = () =>
     users.filter((user) => {
@@ -33,13 +47,13 @@ function UserInfo() {
     });
 
   const sortUsers = (filteredUsers) =>
-  filteredUsers.sort((userA, userB) => {
+    filteredUsers.sort((userA, userB) => {
       const userAValues = getUserInfo(userA);
-      const userBValues = getUserInfo(userB)
-      if(userAValues[sort] < userBValues[sort]){
+      const userBValues = getUserInfo(userB);
+      if (userAValues[sort] < userBValues[sort]) {
         return -1;
-      }else if(userAValues[sort] > userBValues[sort]) {
-        return 1
+      } else if (userAValues[sort] > userBValues[sort]) {
+        return 1;
       }
       return 0;
     });
@@ -50,9 +64,24 @@ function UserInfo() {
   return (
     <div className="user-info-container">
       <SearchBar onHandleChange={handleSetFilter} />
-      <SortBar onHandleChange={handleSetSort}/>
+      <SortBar onHandleChange={handleSetSort} />
       {sortedUsers?.map(
-        (user) => user.id.value && <UserCard key={user.id.value} user={user} />
+        (user, index) =>
+          user.id.value && (
+            <UserCard
+              key={user.id.value}
+              user={user}
+              index={index}
+              setModalIsOpen={setModalIsOpen}
+            />
+          )
+      )}
+      {editUser && (
+        <UserModal
+          user={editUser.user}
+          isOpen={isOpen}
+          onHandleSave={onHandleSave}
+        />
       )}
     </div>
   );

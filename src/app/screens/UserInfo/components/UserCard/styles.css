@@ -11,7 +11,7 @@
   width: 330px;
 }
 
-.user-card-header {
+.user-card-header-container {
   background: #4572fc;
   border-bottom: 1px solid black;
   border-radius: 10px;
@@ -21,6 +21,13 @@
   height: 40%;
   padding-top: 20px;
   width: 100%;
+}
+
+.user-card-header {
+  display: flex;
+  flex-direction: row;
+  padding: 0 10px;
+  width: 250px;
 }
 
 .user-card-body {
@@ -35,6 +42,8 @@
   color: white;
   font-size: 22px;
   font-weight: bold;
+  text-align: center;
+  width: 100%;
 }
 
 .user-pic-container {
@@ -64,4 +73,10 @@
   font-weight: bold;
   margin-top: 10px;
   text-align: center;
+}
+
+.edit-icon {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
 }
